@@ -22,7 +22,7 @@ import math
 import time
 
 import Adafruit_GPIO.SPI as SPI
-import Adafruit_SSD1306
+import Adafruit_SSD1351
 
 import Image
 import ImageFont
@@ -44,16 +44,16 @@ SPI_DEVICE = 0
 # SPI_DEVICE = 0
 
 # 128x32 display with hardware I2C:
-disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST)
+disp = Adafruit_SSD1351.SSD1351_128_32(rst=RST)
 
 # 128x64 display with hardware I2C:
-# disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+# disp = Adafruit_SSD1351.SSD1351_128_64(rst=RST)
 
 # 128x32 display with hardware SPI:
-# disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+# disp = Adafruit_SSD1351.SSD1351_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
 
 # 128x64 display with hardware SPI:
-# disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+# disp = Adafruit_SSD1351.SSD1351_128_64(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
 
 # Initialize library.
 disp.begin()
@@ -81,7 +81,7 @@ font = ImageFont.load_default()
 draw = ImageDraw.Draw(image)
 
 # Define text and get total width.
-text = 'SSD1306 ORGANIC LED DISPLAY. THIS IS AN OLD SCHOOL DEMO SCROLLER!! GREETZ TO: LADYADA & THE ADAFRUIT CREW, TRIXTER, FUTURE CREW, AND FARBRAUSCH'
+text = 'SSD1351 ORGANIC LED DISPLAY. THIS IS AN OLD SCHOOL DEMO SCROLLER!! GREETZ TO: LADYADA & THE ADAFRUIT CREW, TRIXTER, FUTURE CREW, AND FARBRAUSCH'
 maxwidth, unused = draw.textsize(text, font=font)
 
 # Set animation and sine wave parameters.
