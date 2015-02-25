@@ -277,19 +277,19 @@ class SSD1351_128_96(SSD1351Base):
 
 	def _initialize(self):
 		# 128x96 pixel specific initialization.
-		# My version.
+		# My version
 		self.command(SSD1351_COMMANDLOCK)  # set command lock
-    	self.data(0x12)
-    	self.command(SSD1351_COMMANDLOCK)  # set command lock
-    	self.data(0xB1)
+		self.data(0x12)
+		self.command(SSD1351_COMMANDLOCK)  # set command lock
+		self.data(0xB1)
 		self.command(SSD1351_DISPLAYOFF)   # 0xAE
 		self.command(SSD1351_CLOCKDIV)     # 0xB3
-    	self.command(0xF1)  				   # 7:4 = Oscillator Frequency, 3:0 = CLK Div Ratio (A[3:0]+1 = 1..16)
-    	self.command(SSD1351_MUXRATIO)
-    	self.data(127)
-    	self.command(SSD1351_SETREMAP)
-    	self.data(0x74)
-  		self.command(SSD1351_SETCOLUMN)
+		self.command(0xF1)  				   # 7:4 = Oscillator Frequency, 3:0 = CLK Div Ratio (A[3:0]+1 = 1..16)
+		self.command(SSD1351_MUXRATIO)
+		self.data(127)
+		self.command(SSD1351_SETREMAP)
+		self.data(0x74)
+		self.command(SSD1351_SETCOLUMN)
     	self.data(0x00)
     	self.data(0x7F)
     	self.command(SSD1351_SETROW)
