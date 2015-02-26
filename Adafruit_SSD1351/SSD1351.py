@@ -272,7 +272,7 @@ class SSD1351Base(object):
 		self.command(SSD1351_NORMALDISPLAY)
 
 	def rawfill(self, x, y, color):
-		if ((x >= self.width) || (y >= self.height))
+		if ((x >= self.width) or (y >= self.height))
 			return
 		if (y+h > self.height)
     		h = self.height - y - 1
