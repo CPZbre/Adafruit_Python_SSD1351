@@ -66,7 +66,7 @@ disp.clear()
 #	image = Image.open('happycat_oled_32.ppm').convert('1')
 
 # Alternatively load a different format image, resize it, and convert to 1 bit color.
-image = Image.open('happycat.png').resize((disp.width, disp.height), Image.ANTIALIAS)
+image = Image.open('happycat.png').resize((128, 96), Image.ANTIALIAS)
 
 # Display image.
 disp.roughimage(image)

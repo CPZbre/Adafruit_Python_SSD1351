@@ -295,7 +295,7 @@ class SSD1351Base(object):
 			self.data(fillcolor >> 8)
 			self.data(fillcolor)
 	
-	def color565(r, g, b):
+	def color565(self, r, g, b):
   		c = r >> 3
 		c <<= 6
 		c |= g >> 2
@@ -311,13 +311,17 @@ class SSD1351Base(object):
 		self.data(0)
 		self.data(self.height-1)
 		#fill
-		pix = image.load()
+		width, height = image.size
+		rgb_image = image.convert('RGB')
+		pix = rgb_image.load()
 		self.command(SSD1351_WRITERAM)
-		for num in range (0, self.width -1):
-			for num2 in range (0, self.height-1):
-				r,g,b = pix[num, num2]
-				self.data( self.color565(r,g,b) >> 8)
-				self.data( self.color565(r,g,b)
+		for row in range (0, height -1):
+			for column in range (0, width-1):
+				r,g,b = pix[column, row]
+				print (column, row)
+				color = self.color565(r,g,b)
+				self.data( color >> 8)
+				self.data( color )
 
 class SSD1351_128_96(SSD1351Base):
 	def __init__(self, rst, dc=None, sclk=None, din=None, cs=None, gpio=None,
