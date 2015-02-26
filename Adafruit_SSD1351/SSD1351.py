@@ -272,11 +272,11 @@ class SSD1351Base(object):
 		self.command(SSD1351_NORMALDISPLAY)
 
 	def rawfill(self, x, y, color):
-		if ((x >= self.width) or (y >= self.height))
+		if (x >= self.width) or (y >= self.height):
 			return
-		if (y+h > self.height)
+		if y+h > self.height:
     		h = self.height - y - 1
-		if (x+w > self.width)
+		if x+w > self.width:
 			w = self.width - x - 1
 		self.command(SSD1351_CMD_SETCOLUMN)
 		self.data(x)
@@ -286,9 +286,9 @@ class SSD1351Base(object):
 		self.data(y+h-1)
 		#fill!
 		self.command(SSD1351_CMD_WRITERAM)
-		for num in range (0, w*h)
-			writeData(fillcolor >> 8)
-			writeData(fillcolor)
+		for num in range (0, w*h):
+			self.data(fillcolor >> 8)
+			self.data(fillcolor)
 
 class SSD1351_128_96(SSD1351Base):
 	def __init__(self, rst, dc=None, sclk=None, din=None, cs=None, gpio=None,
