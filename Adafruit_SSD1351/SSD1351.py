@@ -116,7 +116,7 @@ class SSD1351Base(object):
 		self.width = width
 		self.height = height
 		self._pages = height/8
-		self._buffer = [0]*(width*self._pages)
+		self._buffer = [0]*(width*height)
 		# Default to platform GPIO if not provided.
 		self._gpio = gpio
 		if self._gpio is None:
@@ -232,7 +232,7 @@ class SSD1351Base(object):
 		pix = image.load()
 		# Iterate through the memory pages
 		index = 0
-		for page in range(self._pages):
+		for page in range(self.height):
 			# Iterate through all x axis columns.
 			for x in range(self.width):
 				# Set the bits for the column of pixels at the current position.
@@ -247,7 +247,7 @@ class SSD1351Base(object):
 
 	def clear(self):
 		"""Clear contents of image buffer."""
-		self._buffer = [0]*(self.width*self._pages)
+		self._buffer = [0]*(self.width*self.height)
 
 	def set_contrast(self, contrast):
 		"""Sets the contrast of the display.  Contrast should be a value between
