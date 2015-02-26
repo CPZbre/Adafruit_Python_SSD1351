@@ -281,14 +281,14 @@ class SSD1351Base(object):
 		if x+w > self.width:
 			w = self.width-x-1
 
-		self.command(SSD1351_CMD_SETCOLUMN)
+		self.command(SSD1351_SETCOLUMN)
 		self.data(x)
 		self.data(x+w-1)
- 		self.command(SSD1351_CMD_SETROW)
+ 		self.command(SSD1351_SETROW)
 		self.data(y)
 		self.data(y+h-1)
 		#fill!
-		self.command(SSD1351_CMD_WRITERAM)
+		self.command(SSD1351_WRITERAM)
 		for num in range (0, w*h):
 			self.data(fillcolor >> 8)
 			self.data(fillcolor)
