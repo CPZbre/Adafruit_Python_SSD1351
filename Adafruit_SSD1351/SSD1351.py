@@ -294,6 +294,14 @@ class SSD1351Base(object):
 		for num in range (0, w*h):
 			self.data(fillcolor >> 8)
 			self.data(fillcolor)
+	
+	def color565(r, g, b):
+  		c = r >> 3
+		c <<= 6
+		c |= g >> 2
+		c <<= 5
+		c |= b >> 3
+		return c
 
 	def roughimage(self, image):
 		self.command(SSD1351_SETCOLUMN)
@@ -302,12 +310,14 @@ class SSD1351Base(object):
  		self.command(SSD1351_SETROW)
 		self.data(0)
 		self.data(self.height-1)
-		#fill!
+		#fill
+		pix = image.load()
 		self.command(SSD1351_WRITERAM)
 		for num in range (0, self.width -1):
-			for num2 in range (0, self.height-1);
-				self.data( image.getpixel(num,num2) >> 8)
-				self.data( image.getpixel(num,num2))
+			for num2 in range (0, self.height-1):
+				r,g,b = pix[num, num2]
+				self.data( self.color565(r,g,b) >> 8)
+				self.data( self.color565(r,g,b)
 
 class SSD1351_128_96(SSD1351Base):
 	def __init__(self, rst, dc=None, sclk=None, din=None, cs=None, gpio=None,

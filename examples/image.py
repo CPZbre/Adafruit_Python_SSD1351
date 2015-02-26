@@ -57,7 +57,7 @@ disp.begin()
 
 # Clear display.
 disp.clear()
-disp.display()
+# disp.display()
 
 # Load image based on OLED display height.  Note that image is converted to 1 bit color.
 #if disp.height == 64:
@@ -70,4 +70,4 @@ image = Image.open('happycat.png').resize((disp.width, disp.height), Image.ANTIA
 
 # Display image.
 disp.roughimage(image)
-disp.display()
+# disp.display()
