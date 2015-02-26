@@ -100,6 +100,8 @@ SSD1351_STOPSCROLL  = 0x9E
 SSD1351_STARTSCROLL = 0x9F
 
 
+
+
 class SSD1351Base(object):
 	"""Base class for SSD1351-based OLED displays.  Implementors should subclass
 	and provide an implementation for the _initialize function.
@@ -269,6 +271,24 @@ class SSD1351Base(object):
 	def invert(self):
 		self.command(SSD1351_NORMALDISPLAY)
 
+	def rawfill(self, x, y, color):
+		if ((x >= self.width) || (y >= self.height))
+			return
+		if (y+h > self.height)
+    		h = self.height - y - 1
+		if (x+w > self.width)
+			w = self.width - x - 1
+		self.command(SSD1351_CMD_SETCOLUMN)
+		self.data(x)
+		self.data(x+w-1)
+ 		self.command(SSD1351_CMD_SETROW)
+		self.data(y)
+		self.data(y+h-1)
+		#fill!
+		self.command(SSD1351_CMD_WRITERAM)
+		for num in range (0, w*h)
+			writeData(fillcolor >> 8)
+			writeData(fillcolor)
 
 class SSD1351_128_96(SSD1351Base):
 	def __init__(self, rst, dc=None, sclk=None, din=None, cs=None, gpio=None,
