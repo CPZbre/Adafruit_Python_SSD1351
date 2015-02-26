@@ -72,4 +72,5 @@ disp.begin()
 # Clear display.
 disp.clear()
 disp.display()
-disp.rawfill(35,85,15, 15, 19)
+disp.rawfill(0,0,128,96,0)
+disp.rawfill(35,65,15,15,255)
