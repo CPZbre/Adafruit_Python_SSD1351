@@ -210,7 +210,9 @@ class SSD1351Base(object):
 			# Set DC high for data.
 			self._gpio.set_high(self._dc)
 			# Write buffer.
+			self.command(SSD1351_WRITERAM)
 			self._spi.write(self._buffer)
+
 		else:
 			for i in range(0, len(self._buffer), 16):
 				control = 0x40   # Co = 0, DC = 0
