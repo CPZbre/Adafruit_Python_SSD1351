@@ -72,4 +72,3 @@ disp.begin()
 # Clear display.
 disp.clear()
 disp.display()
-disp.invert()
