@@ -72,3 +72,4 @@ disp.begin()
 # Clear display.
 disp.clear()
 disp.display()
+disp.rawfill(35,85,19)
