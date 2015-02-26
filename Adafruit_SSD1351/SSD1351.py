@@ -220,8 +220,8 @@ class SSD1351Base(object):
 		"""Set buffer to value of Python Imaging Library image.  The image should
 		be in 1 bit mode and a size equal to the display size.
 		"""
-		if image.mode != '1':
-			raise ValueError('Image must be in mode 1.')
+		# if image.mode != '1':
+		#	raise ValueError('Image must be in mode 1.')
 		imwidth, imheight = image.size
 		if imwidth != self.width or imheight != self.height:
 			raise ValueError('Image must be same dimensions as display ({0}x{1}).' \
