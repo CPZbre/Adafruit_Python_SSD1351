@@ -311,14 +311,14 @@ class SSD1351Base(object):
 		self.data(0)
 		self.data(self.height-1)
 		#fill
-		width, height = image.size
+		im_width, im_height = image.size
+		print(im_width, im_height)
 		rgb_image = image.convert('RGB')
 		pix = rgb_image.load()
 		self.command(SSD1351_WRITERAM)
-		for row in range (0, height -1):
-			for column in range (0, width-1):
+		for row in range (0, im_height):
+			for column in range (0, im_width):
 				r,g,b = pix[column, row]
-				print (column, row)
 				color = self.color565(r,g,b)
 				self.data( color >> 8)
 				self.data( color )
