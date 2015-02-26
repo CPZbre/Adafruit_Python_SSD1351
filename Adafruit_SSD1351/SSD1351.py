@@ -200,7 +200,7 @@ class SSD1351Base(object):
 		self.command(SSD1351_SETCOLUMN)
 		self.command(0)              # Column start address. (0 = reset)
 		self.command(self.width-1)   # Column end address.
-		self.command(SSD1351_PAGEADDR)
+		self.command(SSD1351_SETROW)
 		self.command(0)              # Page start address. (0 = reset)
 		self.command(self._pages-1)  # Page end address.
 		# Write buffer data.
