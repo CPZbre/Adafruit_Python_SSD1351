@@ -271,7 +271,7 @@ class SSD1351Base(object):
 	def invert(self):
 		self.command(SSD1351_NORMALDISPLAY)
 
-	def rawfill(self, x, y, fillcolor):
+	def rawfill(self, x, y, w, h, fillcolor):
 		if (x >= self.width) or (y >= self.height):
 			return
 
