@@ -295,6 +295,20 @@ class SSD1351Base(object):
 			self.data(fillcolor >> 8)
 			self.data(fillcolor)
 
+	def roughimage(self, image):
+		self.command(SSD1351_SETCOLUMN)
+		self.data(0)
+		self.data(self.width - 1)
+ 		self.command(SSD1351_SETROW)
+		self.data(0)
+		self.data(self.height-1)
+		#fill!
+		self.command(SSD1351_WRITERAM)
+		for num in range (0, self.width -1):
+			for num2 in range (0, self.height-1);
+				self.data( image.getpixel(num,num2) >> 8)
+				self.data( image.getpixel(num,num2))
+
 class SSD1351_128_96(SSD1351Base):
 	def __init__(self, rst, dc=None, sclk=None, din=None, cs=None, gpio=None,
 				 spi=None, i2c_bus=None, i2c_address=SSD1351_I2C_ADDRESS,

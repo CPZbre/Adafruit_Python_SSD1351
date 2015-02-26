@@ -69,5 +69,5 @@ disp.display()
 image = Image.open('happycat.png').resize((disp.width, disp.height), Image.ANTIALIAS)
 
 # Display image.
-disp.image(image)
+disp.roughimage(image)
 disp.display()
