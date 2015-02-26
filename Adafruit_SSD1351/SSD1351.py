@@ -204,7 +204,7 @@ class SSD1351Base(object):
 		self.data(self.width-1)   # Column end address.
 		self.command(SSD1351_SETROW)
 		self.data(0)              # Page start address. (0 = reset)
-		self.data(self._height-1)  # Page end address.
+		self.data(self.height-1)  # Page end address.
 		# Write buffer data.
 		if self._spi is not None:
 			# Set DC high for data.
