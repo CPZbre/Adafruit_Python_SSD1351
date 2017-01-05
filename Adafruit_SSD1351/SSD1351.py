@@ -376,3 +376,58 @@ class SSD1351_128_96(SSD1351Base):
 		self.data(0x55)
 		self.command(SSD1351_PRECHARGE2)
 		self.data(0x01)
+
+		
+
+class SSD1351_128_128(SSD1351Base):
+	def __init__(self, rst, dc=None, sclk=None, din=None, cs=None, gpio=None,
+				 spi=None, i2c_bus=None, i2c_address=SSD1351_I2C_ADDRESS,
+				 i2c=None):
+		# Call base class constructor.
+		super(SSD1351_128_128, self).__init__(128, 128, rst, dc, sclk, din, cs, gpio, spi, i2c_bus, i2c_address, i2c)
+
+	def _initialize(self):
+		# 128x96 pixel specific initialization.
+		# My version
+		self.command(SSD1351_COMMANDLOCK)  # set command lock
+		self.data(0x12)
+		self.command(SSD1351_COMMANDLOCK)  # set command lock
+		self.data(0xB1)
+		self.command(SSD1351_DISPLAYOFF)   # 0xAE
+		self.command(SSD1351_CLOCKDIV)     # 0xB3
+		self.command(0xF1)  				   # 7:4 = Oscillator Frequency, 3:0 = CLK Div Ratio (A[3:0]+1 = 1..16)
+		self.command(SSD1351_MUXRATIO)
+		self.data(127)
+		self.command(SSD1351_SETREMAP)
+		self.data(0x74)
+		self.command(SSD1351_SETCOLUMN)
+		self.data(0x00)
+		self.data(0x7F)
+		self.command(SSD1351_SETROW)
+		self.data(0x00)
+		self.data(0x7F)
+		self.command(SSD1351_STARTLINE)  # 0xA1
+		self.data(128)
+		self.command(SSD1351_DISPLAYOFFSET) 	# 0xA2
+		self.data(0x0)
+		self.command(SSD1351_SETGPIO)
+		self.data(0x00)
+		self.command(SSD1351_FUNCTIONSELECT)
+		self.data(0x01)                         #internal (diode drop)
+		self.command(SSD1351_PRECHARGE)  		# 0xB1
+		self.command(0x32)
+		self.command(SSD1351_VCOMH)  			# 0xBE
+		self.command(0x05)
+		self.command(SSD1351_NORMALDISPLAY)  	# 0xA6
+		self.command(SSD1351_CONTRASTABC)
+		self.data(0xC8)
+		self.data(0x80)
+		self.data(0xC8)
+		self.command(SSD1351_CONTRASTMASTER)
+		self.data(0x0F)
+		self.command(SSD1351_SETVSL)
+		self.data(0xA0)
+		self.data(0xB5)
+		self.data(0x55)
+		self.command(SSD1351_PRECHARGE2)
+		self.data(0x01)
