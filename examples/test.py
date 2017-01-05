@@ -59,7 +59,10 @@ SPI_DEVICE = 0
 # disp = Adafruit_SSD1351.SSD1351_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
 
 # 128x96 display with hardware SPI:
-disp = Adafruit_SSD1351.SSD1351_128_96(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+#disp = Adafruit_SSD1351.SSD1351_128_96(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+
+# 128x128 display with hardware SPI:
+disp = Adafruit_SSD1351.SSD1351_128_128(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
 
 # Alternatively you can specify a software SPI implementation by providing
 # digital GPIO pin numbers for all the required display pins.  For example
