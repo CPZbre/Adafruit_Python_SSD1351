@@ -116,7 +116,7 @@ class SSD1351Base(object):
 		self.width = width
 		self.height = height
 		self._pages = height/8
-		self._buffer = [0]*(width*height)
+		self._buffer = [0]*(width*height*2)
 		# Default to platform GPIO if not provided.
 		self._gpio = gpio
 		if self._gpio is None:
@@ -206,17 +206,17 @@ class SSD1351Base(object):
 		self.data(0)              # Page start address. (0 = reset)
 		self.data(self.height-1)  # Page end address.
 		# Write buffer data.
-		if self._spi is not None:
-			# Set DC high for data.
-			self._gpio.set_high(self._dc)
-			# Write buffer.
-			self.command(SSD1351_WRITERAM)
-			self._spi.write(self._buffer)
-
-		else:
-			for i in range(0, len(self._buffer), 16):
-				control = 0x40   # Co = 0, DC = 0
-				self._i2c.writeList(control, self._buffer[i:i+16])
+		self.command(SSD1351_SETCOLUMN)
+		self.data(0)              # Column start address. (0 = reset)
+		self.data(self.width-1)   # Column end address.
+		self.command(SSD1351_SETROW)
+		self.data(0)              # Page start address. (0 = reset)
+		self.data(self.height-1)  # Page end address.
+		
+		self.command(SSD1351_WRITERAM)
+		self._gpio.set_high(self._dc)
+		for i in range (0, self.width*self.height*2,4096):
+			self._spi.write(self._buffer[i:i+4096])
 
 	def image(self, image):
 		"""Set buffer to value of Python Imaging Library image.  The image should
@@ -232,22 +232,18 @@ class SSD1351Base(object):
 		pix = image.load()
 		# Iterate through the memory pages
 		index = 0
-		for page in range(self.height):
+		for y in range(self.height):
 			# Iterate through all x axis columns.
 			for x in range(self.width):
-				# Set the bits for the column of pixels at the current position.
-				bits = 0
-				# Don't use range here as it's a bit slow
-				for bit in [0, 1, 2, 3, 4, 5, 6, 7]:
-					bits = bits << 1
-					bits |= 0 if pix[(x, page*8+7-bit)] == 0 else 1
-				# Update buffer byte and increment to next byte.
-				self._buffer[index] = bits
-				index += 1
+                                r,g,b = pix[(x,y)]
+                                pix565 = self.color565(r, g, b)
+                                self._buffer[index] = pix565 >> 8
+                                self._buffer[index+1] = pix565
+				index += 2
 
 	def clear(self):
 		"""Clear contents of image buffer."""
-		self._buffer = [0]*(self.width*self.height)
+		self._buffer = [0]*(self.width*self.height*2)
 
 	def set_contrast(self, contrast):
 		"""Sets the contrast of the display.  Contrast should be a value between
